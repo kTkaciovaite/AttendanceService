@@ -4,10 +4,9 @@ namespace AttendanceService.WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
-            
-
             return View();
         }
 
@@ -517,6 +516,294 @@ namespace AttendanceService.WebApp.Controllers
         //                    new Student
         //                    {
         //                        Name = "Karolina", Surname = "Tkaciovaite", CardNumber = "EC8C31D5", Lectures = new List<Lecture>
+        //                        {
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[0], Lecturer = lecturers[1], LectureTime = lectureTimes[2],
+        //                                LectureType = lectureTypes[0], Subject = subjects[0], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 2) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 9) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 16) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 23) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 30) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[6], Lecturer = lecturers[0], LectureTime = lectureTimes[3],
+        //                                LectureType = lectureTypes[2], Subject = subjects[0], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 2) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 9) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 16) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 23) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 30) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[1], Lecturer = lecturers[2], LectureTime = lectureTimes[2],
+        //                                LectureType = lectureTypes[0], Subject = subjects[1], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 7) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 21) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 7) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 21) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 4) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 11) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 18) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 25) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 5, 2) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[3], Lecturer = lecturers[3], LectureTime = lectureTimes[3],
+        //                                LectureType = lectureTypes[0], Subject = subjects[3], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 7) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 21) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 7) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 21) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 4) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 11) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 18) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 25) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 5, 2) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[4], Lecturer = lecturers[3], LectureTime = lectureTimes[4],
+        //                                LectureType = lectureTypes[2], Subject = subjects[3], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 11) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 25) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[4], Lecturer = lecturers[7], LectureTime = lectureTimes[1],
+        //                                LectureType = lectureTypes[2], Subject = subjects[1], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 8) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 22) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 1) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 8) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 22) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 29) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 5, 3) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[0], Lecturer = lecturers[5], LectureTime = lectureTimes[2],
+        //                                LectureType = lectureTypes[0], Subject = subjects[2], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 8) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 22) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 1) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 8) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 22) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 29) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 5, 3) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[2], Lecturer = lecturers[6], LectureTime = lectureTimes[3],
+        //                                LectureType = lectureTypes[2], Subject = subjects[2], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 1) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 29) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 26) }
+        //                                }
+        //                            },
+        //                        }
+        //                    },
+        //                    new Student
+        //                    {
+        //                        Name = "Vardas4", Surname = "Pavarde4", CardNumber = "00000003", Lectures = new List<Lecture>
+        //                        {
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[0], Lecturer = lecturers[1], LectureTime = lectureTimes[2],
+        //                                LectureType = lectureTypes[0], Subject = subjects[0], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 2) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 9) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 16) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 23) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 30) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[6], Lecturer = lecturers[0], LectureTime = lectureTimes[3],
+        //                                LectureType = lectureTypes[2], Subject = subjects[0], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 2) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 9) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 16) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 23) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 30) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[1], Lecturer = lecturers[2], LectureTime = lectureTimes[2],
+        //                                LectureType = lectureTypes[0], Subject = subjects[1], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 7) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 21) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 7) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 21) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 4) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 11) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 18) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 25) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 5, 2) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[3], Lecturer = lecturers[3], LectureTime = lectureTimes[3],
+        //                                LectureType = lectureTypes[0], Subject = subjects[3], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 7) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 21) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 7) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 21) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 4) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 11) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 18) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 25) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 5, 2) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[4], Lecturer = lecturers[3], LectureTime = lectureTimes[4],
+        //                                LectureType = lectureTypes[2], Subject = subjects[3], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 14) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 28) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 11) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 25) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[4], Lecturer = lecturers[7], LectureTime = lectureTimes[1],
+        //                                LectureType = lectureTypes[2], Subject = subjects[1], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 8) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 22) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 1) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 8) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 22) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 29) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 5, 3) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[0], Lecturer = lecturers[5], LectureTime = lectureTimes[2],
+        //                                LectureType = lectureTypes[0], Subject = subjects[2], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 8) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 22) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 1) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 8) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 22) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 29) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 5) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 19) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 26) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 5, 3) }
+        //                                }
+        //                            },
+        //                            new Lecture {
+        //                                Auditorium = auditoriums[2], Lecturer = lecturers[6], LectureTime = lectureTimes[3],
+        //                                LectureType = lectureTypes[2], Subject = subjects[2], Occurrences = new List<Occurrence>
+        //                                {
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 2, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 1) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 15) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 3, 29) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 12) },
+        //                                    new Occurrence { IsAttended = false, Date = new DateTime(2018, 4, 26) }
+        //                                }
+        //                            },
+        //                        }
+        //                    },
+        //                    new Student
+        //                    {
+        //                        Name = "Vardas5", Surname = "Pavarde5", CardNumber = "00000004", Lectures = new List<Lecture>
         //                        {
         //                            new Lecture {
         //                                Auditorium = auditoriums[0], Lecturer = lecturers[1], LectureTime = lectureTimes[2],
