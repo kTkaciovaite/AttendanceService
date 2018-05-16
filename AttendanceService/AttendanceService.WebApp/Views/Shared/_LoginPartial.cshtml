@@ -5,11 +5,16 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top navigation">
             <div class="container">
                 <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <div class="navigation-title">LANKOMUMO ŽYMĖJIMO INFORMACINĖ SISTEMA</div>
+                        </li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Atsijungti</a></li>
                     </ul>
                 </div>
             </div>

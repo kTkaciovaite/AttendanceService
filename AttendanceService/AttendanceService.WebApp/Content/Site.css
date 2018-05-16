@@ -77,4 +77,16 @@ textarea {
             background-color: rgb(104, 185, 245);
         }
 
-    
+.navigation {
+    background-color: #003665
+}
+
+    .navigation .navigation-title {
+        color: #fff;
+        width: 180px;
+        margin-top: 6px;
+    }
+
+    .navigation .nav li a {
+        color: #fff;
+    }

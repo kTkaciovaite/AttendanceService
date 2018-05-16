@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AttendanceService.Domain
 {
     public class Lecture
     {
         public int Id { get; set; }
-
-        // public bool IsAttended { get; set; }
 
         public Auditorium Auditorium { get; set; }
 
@@ -18,7 +15,9 @@ namespace AttendanceService.Domain
         public LectureType LectureType { get; set; }
 
         public Subject Subject { get; set; }
+        
+        public Group Group { get; set; }
 
-        public List<Occurrence> Occurrences { get; set; }
+        public List<Occurence> Occurences { get; set; }
     }
 }

@@ -5,6 +5,8 @@ namespace AttendanceService.DataAccess
 {
     public class AttendanceContext : DbContext
     {
+        public DbSet<Attendance> Attendance { get; set; }
+
         public DbSet<AttendanceEntry> AttendanceEntry { get; set; }
 
         public DbSet<Auditorium> Auditorium { get; set; }
@@ -18,6 +20,8 @@ namespace AttendanceService.DataAccess
         public DbSet<LectureTime> LectureTime { get; set; }
 
         public DbSet<LectureType> LectureType { get; set; }
+
+        public DbSet<Occurence> Occurence { get; set; }
 
         public DbSet<Student> Student { get; set; }
 

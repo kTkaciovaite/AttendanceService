@@ -40,14 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attendance.cs" />
     <Compile Include="AttendanceEntry.cs" />
     <Compile Include="Auditorium.cs" />
-    <Compile Include="Occurrence.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Lecture.cs" />
     <Compile Include="Lecturer.cs" />
     <Compile Include="LectureTime.cs" />
     <Compile Include="LectureType.cs" />
+    <Compile Include="Occurence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="Subject.cs" />

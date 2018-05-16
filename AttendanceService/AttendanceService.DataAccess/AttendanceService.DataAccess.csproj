@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="AttendanceContext.cs" />
     <Compile Include="AttendanceEntryDataService.cs" />
+    <Compile Include="LectureDataService.cs" />
+    <Compile Include="LecturerDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentDataService.cs" />
   </ItemGroup>
