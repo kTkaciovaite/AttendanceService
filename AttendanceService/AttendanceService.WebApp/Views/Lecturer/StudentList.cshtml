@@ -1,0 +1,90 @@
+﻿@model AttendanceService.WebApp.ViewModels.StudentListViewModel
+
+<h2>@Model.Subject.Name @Model.Subject.Code</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body lecture-info">
+                <strong>Data</strong>
+                <div>@Model.Date.ToShortDateString()</div>
+                <strong>Paskaitos laikas</strong>
+                <div>@Model.LectureTime.LectureStart.ToString("HH:mm") - @Model.LectureTime.LectureEnd.ToString("HH:mm")</div>
+                <strong>Auditorija</strong>
+                <div>@Model.Auditorium</div>
+                <strong>Dėstytojas</strong>
+                <div>@Model.Lecturer.Name @Model.Lecturer.Surname</div>
+                <strong>Paskaitos tipas</strong>
+                <div>@Model.LectureType</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">@Model.Group.Name grupės studentų sąrašas</div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col">Vardas</th>
+                <th scope="col">Pavardė</th>
+                <th scope="col" class="text-center">Grupė</th>
+                <th scope="col" class="text-center">Ar atvyko</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 0;}
+            @foreach (var student in Model.Group.Students)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@(i + 1)</th>
+                    <td>@student.Name</td>
+                    <td>@student.Surname</td>
+                    <td class="text-center">@Model.Group.Name</td>
+                    <td class="text-center attendance-checkbox">
+                        @Html.CheckBox(student.Id.ToString(), false, new { id = student.Id, onclick = "postCheckboxValue(" + student.Id + ")" })
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        function updateCheckboxValues() {
+            $.ajax({
+                url: '@Url.Action("AttendedLectures", "Lecturer")',
+                data: { lectureId: @Model.LectureId, date: "@Model.Date" },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    data.forEach(function (item) {
+                        $("#" + item.StudentId).prop("checked", item.IsAttended);
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed...');
+                } 
+            });
+        }
+        updateCheckboxValues();
+    });
+
+    function postCheckboxValue(id) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateAttendance", "Lecturer")',
+            data: JSON.stringify({ LectureId: @Model.LectureId, StudentId: id, Date: "@Model.Date" }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed...');
+            } 
+        });
+    }
+</script>

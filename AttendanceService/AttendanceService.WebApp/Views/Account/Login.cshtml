@@ -1,7 +1,7 @@
 ﻿@model AttendanceService.WebApp.ViewModels.LoginViewModel
 
 <div class="row">
-    <div class="col-md-5 login">
+    <div class="col-md-4 login">
         <div class="login-title">Prieiga prie studentų lankomumo žymėjimo sistemos</div>
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

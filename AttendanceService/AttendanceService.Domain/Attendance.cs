@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace AttendanceService.Domain
 {
     public class Attendance
@@ -11,6 +9,6 @@ namespace AttendanceService.Domain
 
         public Lecture Lecture { get; set; }
 
-        public List<Occurence> AttendedLectures { get; set; }
+        public string AttendedLectures { get; set; }
     }
 }

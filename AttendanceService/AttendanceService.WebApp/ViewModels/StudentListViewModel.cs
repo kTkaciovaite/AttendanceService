@@ -3,15 +3,13 @@ using System;
 
 namespace AttendanceService.WebApp.ViewModels
 {
-    public class LectureViewModel
+    public class StudentListViewModel
     {
-        public int Id { get; set; }
+        public int LectureId { get; set; }
 
         public string Auditorium { get; set; }
 
-        public string Lecturer { get; set; }
-
-        public DateTime Date { get; set; }
+        public Lecturer Lecturer { get; set; }
 
         public LectureTime LectureTime { get; set; }
 
@@ -20,5 +18,7 @@ namespace AttendanceService.WebApp.ViewModels
         public Subject Subject { get; set; }
 
         public Group Group { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

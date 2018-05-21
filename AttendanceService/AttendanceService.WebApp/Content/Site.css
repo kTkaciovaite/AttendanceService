@@ -78,15 +78,26 @@ textarea {
         }
 
 .navigation {
-    background-color: #003665
+    background-color: #003665;
+    border: none;
+    padding-left: 15px;
 }
 
     .navigation .navigation-title {
         color: #fff;
-        width: 180px;
-        margin-top: 6px;
+        margin-top: 16px;
     }
 
     .navigation .nav li a {
         color: #fff;
     }
+
+.lecture-info  {
+    display: grid;
+    grid-template-columns: 20% 30% 20% 30%;
+}
+
+.lecture-info.panel-body:before {
+    content: "";
+    display: none;
+}

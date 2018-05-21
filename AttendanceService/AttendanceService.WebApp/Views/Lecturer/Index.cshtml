@@ -1,8 +1,131 @@
-﻿@model List<AttendanceService.Domain.Lecture>
+﻿@model List<AttendanceService.WebApp.ViewModels.LectureViewModel>
+
+@{
+    var lecturesToday = Model.Where(x => x.Date.ToShortDateString() == ViewBag.Today.ToShortDateString()).OrderBy(x => x.Date);
+    var futureLectures = Model.Where(x => x.Date > ViewBag.Today).OrderBy(x => x.Date);
+    var pastLectures = Model.Where(x => x.Date < ViewBag.Today).OrderBy(x => x.Date);
+}
+
+<h2>Jūsų paskaitos šiandien</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Paskaitų sąrašas</div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Paskaita</th>
+                <th scope="col" class="text-center">Data</th>
+                <th scope="col" class="text-center">Laikas</th>
+                <th scope="col" class="text-center">Grupė</th>
+                <th scope="col">Dalykas</th>
+                <th scope="col" class="text-center">Auditorija</th>
+                <th scope="col">Dėstytojas</th>
+                <th scope="col" class="text-center">Tipas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lecture in lecturesToday)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
+                    <td class="text-center">@lecture.Date.ToShortDateString()</td>
+                    <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
+                    <td class="text-center">@lecture.Group.Name</td>
+                    <td class="text-left">
+                        @{
+                            var linkText = lecture.Subject.Name + " " + (lecture.Subject.Code);
+                        }
+                        @Html.ActionLink(linkText, "StudentList", "Lecturer", new { id = lecture.Id, date = lecture.Date }, null)
+                    </td>
+                    <td class="text-center">@lecture.Auditorium</td>
+                    <td class="text-left">@lecture.Lecturer</td>
+                    <td class="text-center">@lecture.LectureType</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <h2>Artimiausios paskaitos</h2>
 
-@foreach(var lecture in Model)
-{
-    <div>@lecture.Subject.Name</div>
-}
+<div class="panel panel-default">
+    <div class="panel-heading">Paskaitų sąrašas</div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Paskaita</th>
+                <th scope="col" class="text-center">Data</th>
+                <th scope="col" class="text-center">Laikas</th>
+                <th scope="col" class="text-center">Grupė</th>
+                <th scope="col">Dalykas</th>
+                <th scope="col" class="text-center">Auditorija</th>
+                <th scope="col">Dėstytojas</th>
+                <th scope="col" class="text-center">Tipas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lecture in futureLectures)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
+                    <td class="text-center">@lecture.Date.ToShortDateString()</td>
+                    <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
+                    <td class="text-center">@lecture.Group.Name</td>
+                    <td class="text-left">
+                        @{
+                            var linkText = lecture.Subject.Name + " " + (lecture.Subject.Code);
+                        }
+                        @Html.ActionLink(linkText, "StudentList", "Lecturer", new { id = lecture.Id, date = lecture.Date }, null)
+                    </td>
+                    <td class="text-center">@lecture.Auditorium</td>
+                    <td class="text-left">@lecture.Lecturer</td>
+                    <td class="text-center">@lecture.LectureType</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<h2>Įvykusios paskaitos</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Paskaitų sąrašas</div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Paskaita</th>
+                <th scope="col" class="text-center">Data</th>
+                <th scope="col" class="text-center">Laikas</th>
+                <th scope="col" class="text-center">Grupė</th>
+                <th scope="col">Dalykas</th>
+                <th scope="col" class="text-center">Auditorija</th>
+                <th scope="col">Dėstytojas</th>
+                <th scope="col" class="text-center">Tipas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lecture in pastLectures)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
+                    <td class="text-center">@lecture.Date.ToShortDateString()</td>
+                    <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
+                    <td class="text-center">@lecture.Group.Name</td>
+                    <td class="text-left">
+                        @{
+                            var linkText = lecture.Subject.Name + " " + (lecture.Subject.Code);
+                        }
+                        @Html.ActionLink(linkText, "StudentList", "Lecturer", new { id = lecture.Id, date = lecture.Date }, null)
+                    </td>
+                    <td class="text-center">@lecture.Auditorium</td>
+                    <td class="text-left">@lecture.Lecturer</td>
+                    <td class="text-center">@lecture.LectureType</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

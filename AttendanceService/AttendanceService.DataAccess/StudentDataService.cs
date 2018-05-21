@@ -13,5 +13,13 @@ namespace AttendanceService.DataAccess
                 return context.Student.ToList();
             }
         }
+
+        public Student GetById(int id)
+        {
+            using (var context = new AttendanceContext())
+            {
+                return context.Student.FirstOrDefault(x => x.Id == id);
+            }
+        }
     }
 }
