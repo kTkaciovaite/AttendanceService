@@ -1,5 +1,4 @@
 ﻿using AttendanceService.Domain;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace AttendanceService.DataAccess
@@ -11,6 +10,14 @@ namespace AttendanceService.DataAccess
             using (var context = new AttendanceContext())
             {
                 return context.Group.Include("Students").FirstOrDefault(x => x.Id == id);
+            }
+        }
+
+        public Group GetByStudent(int studentId)
+        {
+            using (var context = new AttendanceContext())
+            {
+                return context.Group.FirstOrDefault(x => x.Students.FirstOrDefault(y => y.Id == studentId) != null);
             }
         }
     }

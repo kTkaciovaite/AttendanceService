@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace AttendanceService.Domain
 {
     public class Student

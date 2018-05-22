@@ -1,10 +1,8 @@
 ﻿using AttendanceService.DataAccess;
-using AttendanceService.Domain;
 using AttendanceService.WebApp.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace AttendanceService.WebApp.Controllers
@@ -112,19 +110,12 @@ namespace AttendanceService.WebApp.Controllers
         public ActionResult UpdateAttendance(UpdateAttendanceViewModel model)
         {
             var attendance = _attendanceDataService.GetStudentAttendance(model.StudentId, model.LectureId);
+            var dateString = model.Date.ToString("yyyy-MM-dd");
 
-            var attendedLectures = attendance.AttendedLectures;
+            attendance.AttendedLectures = attendance.AttendedLectures.Contains(dateString) ?
+                attendance.AttendedLectures.Replace(dateString + ",", "") :
+                attendance.AttendedLectures + dateString + ",";
             
-            if (attendedLectures.Contains(model.Date.ToString("yyyy-MM-dd")))
-            {
-                attendedLectures.Replace(model.Date.ToString("yyyy-MM-dd") + ",", "");
-            }
-            else if (!attendedLectures.Contains(model.Date.ToString("yyyy-MM-dd")))
-            {
-                attendedLectures = attendedLectures + model.Date.ToString("yyyy-MM-dd") + ",";
-            }
-
-            attendance.AttendedLectures = attendedLectures;
             _attendanceDataService.UpdateLectures(attendance);
 
             return Json(attendance);

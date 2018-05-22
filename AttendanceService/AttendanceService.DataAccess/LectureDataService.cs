@@ -23,5 +23,14 @@ namespace AttendanceService.DataAccess
                     .Include("LectureType").Include("Group").Include("Occurences").Where(x => x.Lecturer.Id == id).ToList();
             }
         }
+
+        public List<Lecture> GetByGroupId(int id)
+        {
+            using (var context = new AttendanceContext())
+            {
+                return context.Lecture.Include("Subject").Include("Auditorium").Include("Lecturer").Include("LectureTime")
+                    .Include("LectureType").Include("Group").Include("Occurences").Where(x => x.Group.Id == id).ToList();
+            }
+        }
     }
 }

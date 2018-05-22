@@ -9,7 +9,5 @@ namespace AttendanceService.Domain
         public DateTime Time { get; set; }
 
         public string CardNumber { get; set; }
-
-        public bool IsAdded { get; set; }
     }
 }
