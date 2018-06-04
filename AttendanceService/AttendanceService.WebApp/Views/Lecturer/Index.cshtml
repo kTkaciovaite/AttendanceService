@@ -2,8 +2,8 @@
 
 @{
     var lecturesToday = Model.Where(x => x.Date.ToShortDateString() == ViewBag.Today.ToShortDateString()).OrderBy(x => x.Date);
-    var futureLectures = Model.Where(x => x.Date > ViewBag.Today).OrderBy(x => x.Date);
-    var pastLectures = Model.Where(x => x.Date < ViewBag.Today).OrderBy(x => x.Date);
+    var futureLectures = Model.Where(x => x.Date > ViewBag.Today).OrderBy(x => x.Date).Take(5);
+    var pastLectures = Model.Where(x => x.Date < ViewBag.Today).OrderBy(x => x.Date).Take(5);
 }
 
 <h2>Jūsų paskaitos šiandien</h2>
@@ -29,7 +29,7 @@
             {
                 <tr>
                     <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
-                    <td class="text-center">@lecture.Date.ToShortDateString()</td>
+                    <td class="text-center">@lecture.Date.ToString("yyyy-MM-dd")</td>
                     <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
                     <td class="text-center">@lecture.Group.Name</td>
                     <td class="text-left">
@@ -48,6 +48,7 @@
 </div>
 
 <h2>Artimiausios paskaitos</h2>
+@Html.ActionLink("Peržiūrėti daugiau", "FutureLectures", "Lecturer", null, new { @class = "btn btn-default" })
 
 <div class="panel panel-default">
     <div class="panel-heading">Paskaitų sąrašas</div>
@@ -70,7 +71,7 @@
             {
                 <tr>
                     <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
-                    <td class="text-center">@lecture.Date.ToShortDateString()</td>
+                    <td class="text-center">@lecture.Date.ToString("yyyy-MM-dd")</td>
                     <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
                     <td class="text-center">@lecture.Group.Name</td>
                     <td class="text-left">
@@ -89,6 +90,7 @@
 </div>
 
 <h2>Įvykusios paskaitos</h2>
+@Html.ActionLink("Peržiūrėti daugiau", "PastLectures", "Lecturer", null, new { @class = "btn btn-default" })
 
 <div class="panel panel-default">
     <div class="panel-heading">Paskaitų sąrašas</div>
@@ -111,7 +113,7 @@
             {
                 <tr>
                     <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
-                    <td class="text-center">@lecture.Date.ToShortDateString()</td>
+                    <td class="text-center">@lecture.Date.ToString("yyyy-MM-dd")</td>
                     <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
                     <td class="text-center">@lecture.Group.Name</td>
                     <td class="text-left">
@@ -128,4 +130,3 @@
         </tbody>
     </table>
 </div>
-

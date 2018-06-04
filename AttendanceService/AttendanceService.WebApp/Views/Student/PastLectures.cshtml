@@ -1,0 +1,55 @@
+﻿@model List<AttendanceService.WebApp.ViewModels.StudentLectureViewModel>
+
+<h2>Įvykusios paskaitos</h2>
+
+<input class="form-control" id="filter" type="text" placeholder="Ieškoti">
+
+<div class="panel panel-default">
+    <div class="panel-heading">Paskaitų sąrašas</div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Paskaita</th>
+                <th scope="col" class="text-center">Data</th>
+                <th scope="col" class="text-center">Laikas</th>
+                <th scope="col" class="text-center">Grupė</th>
+                <th scope="col">Dalykas</th>
+                <th scope="col" class="text-center">Auditorija</th>
+                <th scope="col">Dėstytojas</th>
+                <th scope="col" class="text-center">Tipas</th>
+                <th scope="col" class="text-center">Dalyvavimas</th>
+            </tr>
+        </thead>
+        <tbody id="filtered-content">
+            @foreach (var lecture in Model)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
+                    <td class="text-center">@lecture.Date.ToString("yyyy-MM-dd")</td>
+                    <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
+                    <td class="text-center">@lecture.Group.Name</td>
+                    <td class="text-left">@(lecture.Subject.Name + " " + (lecture.Subject.Code))</td>
+                    <td class="text-center">@lecture.Auditorium</td>
+                    <td class="text-left">@lecture.Lecturer</td>
+                    <td class="text-center">@lecture.LectureType</td>
+                    <td class="text-center">
+                        <i class="@(lecture.IsAttended ? "glyphicon glyphicon-ok" : "glyphicon glyphicon-remove")"></i>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $("#filter").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#filtered-content tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>

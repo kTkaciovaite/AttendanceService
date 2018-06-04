@@ -167,6 +167,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\LectureViewModel.cs" />
+    <Compile Include="ViewModels\StudentAttendanceViewModel.cs" />
+    <Compile Include="ViewModels\StudentLectureViewModel.cs" />
     <Compile Include="ViewModels\StudentListViewModel.cs" />
     <Compile Include="ViewModels\StudentsAttendanceViewModel.cs" />
     <Compile Include="ViewModels\UpdateAttendanceViewModel.cs" />
@@ -189,6 +191,13 @@
     <Content Include="Views\Lecturer\Index.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Lecturer\StudentList.cshtml" />
+    <Content Include="Views\Student\PastLectures.cshtml" />
+    <Content Include="Views\Student\TodaysLectures.cshtml" />
+    <Content Include="Views\Student\FutureLectures.cshtml" />
+    <Content Include="Views\Student\Attendance.cshtml" />
+    <Content Include="Views\Lecturer\FutureLectures.cshtml" />
+    <Content Include="Views\Lecturer\PastLectures.cshtml" />
+    <Content Include="Views\Lecturer\TodaysLectures.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

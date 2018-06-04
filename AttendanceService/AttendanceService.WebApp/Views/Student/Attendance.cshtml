@@ -1,0 +1,66 @@
+﻿@model List<AttendanceService.WebApp.ViewModels.StudentAttendanceViewModel>
+
+@{
+    var general = Model.FirstOrDefault(x => x.Subject == "General");
+    var i = 0;
+}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div id="piechart"></div>
+<div class="stats">
+    <h3>Studijų dalykų lankomumo statistika</h3>
+    <ul>
+        @foreach (var stat in Model)
+        {
+            if (stat.Subject != "General")
+            {
+                <li class="inline-list">
+                    <h4>@stat.Subject</h4>
+                    <div id="chart@(i)" style="width: 500px; height: 300px;"></div>
+                    <script type="text/javascript">
+                    google.charts.load('current', { 'packages': ['corechart'] });
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Attendance', 'Attended Lectures'],
+                            ['Neatvyko', @(stat.LectureCount - stat.AttendedLecturesCount)],
+                            ['Atvyko', @stat.AttendedLecturesCount]
+                        ]);
+
+                        var options = {};
+
+                        var chart = new google.visualization.PieChart(document.getElementById('chart@(i)'));
+
+                        chart.draw(data, options);
+                    }
+                    </script>
+                </li>
+
+                i++;
+            }
+        }
+    </ul>
+</div>
+
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Attendance', 'Attended Lectures'],
+            ['Neatvyko', @(general.LectureCount - general.AttendedLecturesCount)],
+            ['Atvyko', @general.AttendedLecturesCount]
+        ]);
+
+        var options = {
+            title: 'Bendras paskaitų lankomumas'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+</script>

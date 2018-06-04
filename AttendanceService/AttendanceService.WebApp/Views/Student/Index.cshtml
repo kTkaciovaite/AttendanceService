@@ -1,7 +1,129 @@
-﻿
+﻿@model List<AttendanceService.WebApp.ViewModels.StudentLectureViewModel>
+
 @{
-    ViewBag.Title = "Index";
+    var lecturesToday = Model.Where(x => x.Date.ToShortDateString() == ViewBag.Today.ToShortDateString()).OrderBy(x => x.Date).Take(5);
+    var futureLectures = Model.Where(x => x.Date > ViewBag.Today).OrderBy(x => x.Date).Take(5);
+    var pastLectures = Model.Where(x => x.Date < ViewBag.Today).OrderBy(x => x.Date).Take(5);
 }
 
-<h2>Index</h2>
+<h2>Jūsų paskaitos šiandien</h2>
 
+<div class="panel panel-default">
+    <div class="panel-heading">Paskaitų sąrašas</div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Paskaita</th>
+                <th scope="col" class="text-center">Data</th>
+                <th scope="col" class="text-center">Laikas</th>
+                <th scope="col" class="text-center">Grupė</th>
+                <th scope="col">Dalykas</th>
+                <th scope="col" class="text-center">Auditorija</th>
+                <th scope="col">Dėstytojas</th>
+                <th scope="col" class="text-center">Tipas</th>
+                <th scope="col" class="text-center">Dalyvavimas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lecture in lecturesToday)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
+                    <td class="text-center">@lecture.Date.ToString("yyyy-MM-dd")</td>
+                    <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
+                    <td class="text-center">@lecture.Group.Name</td>
+                    <td class="text-left">@(lecture.Subject.Name + " " + (lecture.Subject.Code))</td>
+                    <td class="text-center">@lecture.Auditorium</td>
+                    <td class="text-left">@lecture.Lecturer</td>
+                    <td class="text-center">@lecture.LectureType</td>
+                    <td class="text-center">
+                        <i class="@(lecture.IsAttended ? "glyphicon glyphicon-ok" : "glyphicon glyphicon-remove")"></i>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<h2>Artimiausios paskaitos</h2>
+@Html.ActionLink("Peržiūrėti daugiau", "FutureLectures", "Student", null, new { @class = "btn btn-default" })
+
+<div class="panel panel-default">
+    <div class="panel-heading">Paskaitų sąrašas</div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Paskaita</th>
+                <th scope="col" class="text-center">Data</th>
+                <th scope="col" class="text-center">Laikas</th>
+                <th scope="col" class="text-center">Grupė</th>
+                <th scope="col">Dalykas</th>
+                <th scope="col" class="text-center">Auditorija</th>
+                <th scope="col">Dėstytojas</th>
+                <th scope="col" class="text-center">Tipas</th>
+                <th scope="col" class="text-center">Dalyvavimas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lecture in futureLectures)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
+                    <td class="text-center">@lecture.Date.ToString("yyyy-MM-dd")</td>
+                    <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
+                    <td class="text-center">@lecture.Group.Name</td>
+                    <td class="text-left">@(lecture.Subject.Name + " " + (lecture.Subject.Code))</td>
+                    <td class="text-center">@lecture.Auditorium</td>
+                    <td class="text-left">@lecture.Lecturer</td>
+                    <td class="text-center">@lecture.LectureType</td>
+                    <td class="text-center">
+                        <i class="@(lecture.IsAttended ? "glyphicon glyphicon-ok" : "glyphicon glyphicon-remove")"></i>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<h2>Įvykusios paskaitos</h2>
+@Html.ActionLink("Peržiūrėti daugiau", "PastLectures", "Student", null, new { @class = "btn btn-default" })
+
+<div class="panel panel-default">
+    <div class="panel-heading">Paskaitų sąrašas</div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Paskaita</th>
+                <th scope="col" class="text-center">Data</th>
+                <th scope="col" class="text-center">Laikas</th>
+                <th scope="col" class="text-center">Grupė</th>
+                <th scope="col">Dalykas</th>
+                <th scope="col" class="text-center">Auditorija</th>
+                <th scope="col">Dėstytojas</th>
+                <th scope="col" class="text-center">Tipas</th>
+                <th scope="col" class="text-center">Dalyvavimas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lecture in pastLectures)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@lecture.LectureTime.LectureNumber</th>
+                    <td class="text-center">@lecture.Date.ToString("yyyy-MM-dd")</td>
+                    <td class="text-center">@lecture.LectureTime.LectureStart.ToString("HH:mm") - @lecture.LectureTime.LectureEnd.ToString("HH:mm")</td>
+                    <td class="text-center">@lecture.Group.Name</td>
+                    <td class="text-left">@(lecture.Subject.Name + " " + (lecture.Subject.Code))</td>
+                    <td class="text-center">@lecture.Auditorium</td>
+                    <td class="text-left">@lecture.Lecturer</td>
+                    <td class="text-center">@lecture.LectureType</td>
+                    <td class="text-center">
+                        <i class="@(lecture.IsAttended ? "glyphicon glyphicon-ok" : "glyphicon glyphicon-remove")"></i>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

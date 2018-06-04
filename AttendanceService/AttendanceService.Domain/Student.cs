@@ -12,5 +12,7 @@ namespace AttendanceService.Domain
         public string CardNumber { get; set; }
 
         public string UserId { get; set; }
+
+        public string StudentId { get; set; }
     }
 }

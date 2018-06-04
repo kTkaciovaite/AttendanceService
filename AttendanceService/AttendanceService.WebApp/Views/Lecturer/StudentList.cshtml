@@ -7,7 +7,7 @@
         <div class="panel panel-default">
             <div class="panel-body lecture-info">
                 <strong>Data</strong>
-                <div>@Model.Date.ToShortDateString()</div>
+                <div>@Model.Date.ToString("yyyy-MM-dd")</div>
                 <strong>Paskaitos laikas</strong>
                 <div>@Model.LectureTime.LectureStart.ToString("HH:mm") - @Model.LectureTime.LectureEnd.ToString("HH:mm")</div>
                 <strong>Auditorija</strong>
@@ -56,24 +56,25 @@
 <script src="/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        function updateCheckboxValues() {
-            $.ajax({
-                url: '@Url.Action("AttendedLectures", "Lecturer")',
-                data: { lectureId: @Model.LectureId, date: "@Model.Date" },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    data.forEach(function (item) {
-                        $("#" + item.StudentId).prop("checked", item.IsAttended);
-                    });
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert('Failed...');
-                } 
-            });
-        }
         updateCheckboxValues();
     });
+
+    function updateCheckboxValues() {
+        $.ajax({
+            url: '@Url.Action("AttendedLectures", "Lecturer")',
+            data: { lectureId: @Model.LectureId, date: "@Model.Date" },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                data.forEach(function (item) {
+                    $("#" + item.StudentId).prop("checked", item.IsAttended);
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed...');
+            }
+        });
+    }
 
     function postCheckboxValue(id) {
         $.ajax({
@@ -84,7 +85,9 @@
             dataType: "json",
             error: function (xhr, ajaxOptions, thrownError) {
                 alert('Failed...');
-            } 
+            }
         });
     }
+
+    setInterval(updateCheckboxValues, 5000);
 </script>

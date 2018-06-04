@@ -79,18 +79,18 @@ namespace AttendanceService.WebApp.Controllers
 
                 var prif1Students = new List<Student>
                 {
-                    new Student { Name = "Vardas1", Surname = "Pavarde1", CardNumber = "00000000" },
-                    new Student { Name = "Vardas2", Surname = "Pavarde2", CardNumber = "00000001" },
-                    new Student { Name = "Vardas3", Surname = "Pavarde3", CardNumber = "00000002" }
+                    new Student { Name = "Vardas1", Surname = "Pavarde1", CardNumber = "00000000", StudentId = "20140000" },
+                    new Student { Name = "Vardas2", Surname = "Pavarde2", CardNumber = "00000001", StudentId = "20140001" },
+                    new Student { Name = "Vardas3", Surname = "Pavarde3", CardNumber = "00000002", StudentId = "20140002" }
                 };
                 prif1Students.ForEach(x => context.Student.Add(x));
                 context.SaveChanges();
 
                 var prif2Students = new List<Student>
                 {
-                    new Student { Name = "Karolina", Surname = "Tkaciovaite", CardNumber = "EC8C31D5" },
-                    new Student { Name = "Vardas4", Surname = "Pavarde4", CardNumber = "00000003" },
-                    new Student { Name = "Vardas5", Surname = "Pavarde5", CardNumber = "00000004" }
+                    new Student { Name = "Karolina", Surname = "Tkaciovaite", CardNumber = "EC8C31D5", StudentId = "20145066" },
+                    new Student { Name = "Vardas4", Surname = "Pavarde4", CardNumber = "00000003", StudentId = "20140003" },
+                    new Student { Name = "Vardas5", Surname = "Pavarde5", CardNumber = "00000004", StudentId = "20140004" }
                 };
                 prif2Students.ForEach(x => context.Student.Add(x));
                 context.SaveChanges();

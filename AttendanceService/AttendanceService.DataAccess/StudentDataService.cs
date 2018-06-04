@@ -22,6 +22,14 @@ namespace AttendanceService.DataAccess
             }
         }
 
+        public Student GetByUserId(string id)
+        {
+            using (var context = new AttendanceContext())
+            {
+                return context.Student.FirstOrDefault(x => x.UserId == id);
+            }
+        }
+
         public Student GetByCardNumber(string cardNumber)
         {
             using (var context = new AttendanceContext())

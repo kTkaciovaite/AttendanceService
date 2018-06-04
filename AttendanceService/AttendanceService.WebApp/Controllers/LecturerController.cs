@@ -3,6 +3,7 @@ using AttendanceService.WebApp.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace AttendanceService.WebApp.Controllers
@@ -33,33 +34,53 @@ namespace AttendanceService.WebApp.Controllers
             {
                 return View();
             }
-            
-            var lecturer = _lecturerDataService.GetByUserId(userId);
-            var lectures = _lectureDataService.GetByLecturerId(lecturer.Id);
 
-            var mappedLectures = new List<LectureViewModel>();
-
-            foreach(var lecture in lectures)
-            {
-                foreach (var occurence in lecture.Occurences)
-                {
-                    var mappedLecture = new LectureViewModel
-                    {
-                        Id = lecture.Id,
-                        Auditorium = lecture.Auditorium.Name,
-                        Lecturer = lecture.Lecturer.Name + " " + lecture.Lecturer.Surname,
-                        Date = occurence.Date,
-                        LectureTime = lecture.LectureTime,
-                        LectureType = lecture.LectureType.Type,
-                        Subject = lecture.Subject,
-                        Group = lecture.Group
-                    };
-
-                    mappedLectures.Add(mappedLecture);
-                }
-            }
+            var lectures = _getLectures(userId);
                         
-            return View(mappedLectures);
+            return View(lectures);
+        }
+
+        public ActionResult FutureLectures()
+        {
+            var userId = User.Identity.GetUserId();
+
+            if (userId == null || userId == "")
+            {
+                return View();
+            }
+
+            var lectures = _getLectures(userId).Where(x => x.Date > ViewBag.Today).OrderBy(x => x.Date).ToList();
+
+            return View(lectures);
+        }
+
+        public ActionResult PastLectures()
+        {
+            var userId = User.Identity.GetUserId();
+
+            if (userId == null || userId == "")
+            {
+                return View();
+            }
+
+            var lectures = _getLectures(userId).Where(x => x.Date < ViewBag.Today).OrderBy(x => x.Date).ToList();
+
+            return View(lectures);
+        }
+
+        public ActionResult TodaysLectures()
+        {
+            var userId = User.Identity.GetUserId();
+
+            if (userId == null || userId == "")
+            {
+                return View();
+            }
+
+            var lectures = _getLectures(userId).Where(x => x.Date.ToShortDateString() == ViewBag.Today.ToShortDateString())
+                .OrderBy(x => x.Date).ToList();
+
+            return View(lectures);
         }
 
         public ActionResult StudentList(int id, DateTime date)
@@ -119,6 +140,36 @@ namespace AttendanceService.WebApp.Controllers
             _attendanceDataService.UpdateLectures(attendance);
 
             return Json(attendance);
+        }
+
+        private List<LectureViewModel> _getLectures(string userId)
+        {
+            var lecturer = _lecturerDataService.GetByUserId(userId);
+            var lectures = _lectureDataService.GetByLecturerId(lecturer.Id);
+
+            var mappedLectures = new List<LectureViewModel>();
+
+            foreach (var lecture in lectures)
+            {
+                foreach (var occurence in lecture.Occurences)
+                {
+                    var mappedLecture = new LectureViewModel
+                    {
+                        Id = lecture.Id,
+                        Auditorium = lecture.Auditorium.Name,
+                        Lecturer = lecture.Lecturer.Name + " " + lecture.Lecturer.Surname,
+                        Date = occurence.Date,
+                        LectureTime = lecture.LectureTime,
+                        LectureType = lecture.LectureType.Type,
+                        Subject = lecture.Subject,
+                        Group = lecture.Group
+                    };
+
+                    mappedLectures.Add(mappedLecture);
+                }
+            }
+
+            return mappedLectures;
         }
     }
 }

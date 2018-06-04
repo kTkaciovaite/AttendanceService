@@ -14,6 +14,33 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        @if (Request.IsAuthenticated && User.IsInRole("Student"))
+                        {
+                            <li>@Html.ActionLink("Lankomumas", "Attendance", "Student")</li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Paskaitos <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Paskaitos šiandien", "TodaysLectures", "Student")</li>
+                                    <li>@Html.ActionLink("Artimiausios paskaitos", "FutureLectures", "Student")</li>
+                                    <li>@Html.ActionLink("Praėjusios paskaitos", "PastLectures", "Student")</li>
+                                </ul>
+                            </li>
+                        }
+                        @if (Request.IsAuthenticated && User.IsInRole("Lecturer"))
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Paskaitos <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Paskaitos šiandien", "TodaysLectures", "Lecturer")</li>
+                                    <li>@Html.ActionLink("Artimiausios paskaitos", "FutureLectures", "Lecturer")</li>
+                                    <li>@Html.ActionLink("Praėjusios paskaitos", "PastLectures", "Lecturer")</li>
+                                </ul>
+                            </li>
+                        }
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Atsijungti</a></li>
                     </ul>
                 </div>
