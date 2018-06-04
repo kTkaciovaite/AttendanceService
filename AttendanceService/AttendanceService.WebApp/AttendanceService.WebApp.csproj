@@ -158,6 +158,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LecturerController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -167,6 +168,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\LectureViewModel.cs" />
+    <Compile Include="ViewModels\ReportSubjectAttendance.cs" />
     <Compile Include="ViewModels\StudentAttendanceViewModel.cs" />
     <Compile Include="ViewModels\StudentLectureViewModel.cs" />
     <Compile Include="ViewModels\StudentListViewModel.cs" />
@@ -198,6 +200,8 @@
     <Content Include="Views\Lecturer\FutureLectures.cshtml" />
     <Content Include="Views\Lecturer\PastLectures.cshtml" />
     <Content Include="Views\Lecturer\TodaysLectures.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\SubjectAttendance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

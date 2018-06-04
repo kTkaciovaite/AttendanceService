@@ -132,3 +132,7 @@ ul {
 .stats {
     text-align: center;
 }
+
+.report-select {
+    display: inline-block;
+}

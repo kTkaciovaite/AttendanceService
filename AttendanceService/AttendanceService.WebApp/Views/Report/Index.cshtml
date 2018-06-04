@@ -1,0 +1,12 @@
+﻿@model List<AttendanceService.Domain.Subject>
+
+<h2>Ataskaitos</h2>
+<p>Pasirinkite, kokią ataskaitą norite generuoti</p>
+
+<h3>Studentų lankomumo ataskaita pagal studijų dalyką</h3>
+<p>Pasirinkite studijų dalyką</p>
+
+@foreach (var subject in Model)
+{
+    <div>@Html.ActionLink(subject.Name, "SubjectAttendance", "Report", new { id = subject.Id }, new { @class = "" })</div>
+}

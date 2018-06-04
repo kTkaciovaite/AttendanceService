@@ -1,0 +1,40 @@
+﻿@model List<AttendanceService.WebApp.ViewModels.ReportSubjectAttendance>
+
+@{
+    var groupedAttendance = Model.GroupBy(x => x.Group).Select(group => group.ToList()).ToList();
+}
+
+<h2>Studentų lankomumas</h2>
+
+@foreach (var group in groupedAttendance)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">@group.First().Group grupės studentų sąrašas</div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Studento Nr.</th>
+                    <th scope="col">Studentas</th>
+                    <th scope="col" class="text-center">Grupė</th>
+                    <th scope="col" class="text-center">Lankomumas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int i = 0;}
+                @foreach (var item in group)
+                {
+                    <tr>
+                        <td class="text-center">@(i + 1)</td>
+                        <td class="text-center">@item.StudentNumber</td>
+                        <td>@item.Student</td>
+                        <td class="text-center">@item.Group</td>
+                        <td class="text-center">@item.AttendedLecturesCount / @item.LecturesCount</td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+}
